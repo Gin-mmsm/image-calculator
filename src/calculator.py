@@ -12,9 +12,9 @@ tool = tools[0]
 langs = tool.get_available_languages()
 print("Available languages: %s" % ", ".join(langs))
 lang = langs[0]
-print("Will use lang '%s'" % (lang))
+print("Will use lang '%s'" % lang)
 
-filename = '../sample.png'
+filename = '../assets/sample.png'
 
 # 読み込んだ画像をOCRでテキスト抽出してみる。
 txt = tool.image_to_string(
