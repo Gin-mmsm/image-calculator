@@ -11,15 +11,19 @@ tool = tools[0]
 # OCR対応言語を表示
 langs = tool.get_available_languages()
 print("Available languages: %s" % ", ".join(langs))
-lang = langs[0]
+lang = 'eng'
 print("Will use lang '%s'" % lang)
 
 filename = '../assets/sample.png'
+# filename = '../assets/12345.png'
+# filename = '../assets/67890.png'
+# filename = '../assets/+-×.png'
+# filename = '../assets/+-×÷.png'
 
 # 読み込んだ画像をOCRでテキスト抽出してみる。
 txt = tool.image_to_string(
     Image.open(filename),
-    lang="eng",
-    builder=pyocr.builders.DigitBuilder(tesseract_layout=7)
+    lang=lang,
+    builder=pyocr.builders.TextBuilder(tesseract_layout=7)
 )
 print(txt)
