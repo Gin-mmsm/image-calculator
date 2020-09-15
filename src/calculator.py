@@ -40,13 +40,25 @@ def txt_calculation(txt):
     # 空白削除
     txt = txt.replace(' ', '')
     # 0変換
-    txt = re.sub('O|o', '0', txt)
+    txt = re.sub('[AaCcDdeGOoPpQ]', '0', txt)
+    # 1変換
+    txt = re.sub('[!lIij]', '1', txt)
+    # 5変換
+    txt = re.sub('[sS]', '5', txt)
+    # 6変換
+    txt = re.sub('[bh]', '6', txt)
+    # 8変換
+    txt = re.sub('[BR]', '8', txt)
+    # 9変換
+    txt = re.sub('[gq]', '9', txt)
     # ()変換
-    txt = re.sub(r'\[|\{|「', '(', txt)
-    txt = re.sub(r'\]|\}|」', ')', txt)
+    txt = re.sub('[[{「]', '(', txt)
+    txt = re.sub('[]}」]', ')', txt)
+    # +変換
+    txt = re.sub('[Tt]', '+', txt)
     # ×変換
-    txt_for_print = re.sub('X|x', '×', txt)
-    txt_for_calc = re.sub('X|x', '*', txt)
+    txt_for_print = re.sub('[Xx]', '×', txt)
+    txt_for_calc = re.sub('[Xx]', '*', txt)
 
     if re.search(r'[a-zA-Z]+', txt_for_calc):
         return txt_for_print, 'has alphabet character and cannot be interpreted as equation'
@@ -65,8 +77,8 @@ def txt_calculation(txt):
 ----------以下テスト用----------
 '''
 
-# test_txt = '13x(2+8」 -1 oX2'
-test_txt = '(3x[2+8]-1oX2'
+test_txt = '13x(2+8」\ /-[1 oX2]'
+# test_txt = '(3x[2+8]-1oX2'
 # test_txt = "(print('aaa'))"
 # test_txt = "exit()"
 print(txt_calculation(test_txt))
