@@ -7,9 +7,9 @@ import pyocr.builders   # OCR ラッパーライブラリ 対応OCR:Tesseract, C
 def ocr_image(filepath, threshold=100):
     # OCRが使用可能かをチェック
     tools = pyocr.get_available_tools()
-    if len(tools) == 0:
+    if not tools:
         print("Cannot use pyocr")
-        return None
+        return
 
     tool = tools[0]
 
