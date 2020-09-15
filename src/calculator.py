@@ -52,8 +52,8 @@ def txt_calculation(txt):
     # 9変換
     txt = re.sub('[gq]', '9', txt)
     # ()変換
-    txt = re.sub('[[{「]', '(', txt)
-    txt = re.sub('[]}」]', ')', txt)
+    txt = re.sub(r'[\[\{「]', '(', txt)
+    txt = re.sub(r'[\]\}」]', ')', txt)
     # +変換
     txt = re.sub('[Tt]', '+', txt)
     # ×変換
@@ -67,7 +67,7 @@ def txt_calculation(txt):
         ans = eval(txt_for_calc)
     except Exception as e:
         return txt_for_print, 'cannot be interpreted as equation because of ' + str(e)
-    if ans == None:
+    if ans is None:
         return txt_for_print, 'cannot be calculated'
 
     return txt_for_print, ans
