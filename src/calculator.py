@@ -1,7 +1,7 @@
-from PIL import Image           # 画像処理ライブラリ
-import numpy as np              # データ分析用ライブラリ
-import pyocr                    # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
-import pyocr.builders           # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
+from PIL import Image, ImageDraw    # 画像処理ライブラリ
+import numpy as numpy   # データ分析用ライブラリ
+import pyocr    # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
+import pyocr.builders   # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
 
 
 def ocr_image(filepath, threshold=100):
@@ -59,12 +59,34 @@ filename = '../assets/sample.png'
 img = Image.open(filename)
 gray = img.convert('L')
 mono = gray.point(lambda x: 0 if x < 100 else 255)
+# 標準ビューワーが開きます
 mono.show()
 
 # 読み込んだ画像をOCRでテキスト抽出してみる。
-txt = tool.image_to_string(
+# txt = tool.image_to_string(
+#     mono,
+#     lang=lang,
+#     builder=pyocr.builders.TextBuilder(tesseract_layout=7)
+# )
+# print(txt)
+
+# 画像出力
+res = tool.image_to_string(
     mono,
     lang=lang,
-    builder=pyocr.builders.TextBuilder(tesseract_layout=7)
+    builder=pyocr.builders.WordBoxBuilder(tesseract_layout=7)
 )
+
+res_im = mono.convert('RGB')
+res_draw = ImageDraw.Draw(res_im)
+txt_lis = []
+for w in res:
+    print(w.content)
+    txt_lis.append(w.content)
+    print(w.position)
+    res_draw.rectangle(
+        (w.position[0], w.position[1]), None, (255, 0, 0), 2)
+# 標準ビューワーが開きます
+res_im.show()
+txt = ''.join(txt_lis)
 print(txt)
