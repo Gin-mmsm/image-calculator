@@ -43,6 +43,8 @@ def txt_calculation(txt):
     txt = re.sub('[AaCcDdeGOoPpQ]', '0', txt)
     # 1変換
     txt = re.sub('[!lIij]', '1', txt)
+    # 2変換
+    txt = re.sub('[zZ]', '2', txt)
     # 5変換
     txt = re.sub('[sS]', '5', txt)
     # 6変換
