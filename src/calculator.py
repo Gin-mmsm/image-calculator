@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw    # 画像処理ライブラリ
 import numpy as numpy   # データ分析用ライブラリ
 import pyocr    # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
 import pyocr.builders   # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
+import re
 
 
 def ocr_image(filepath, threshold=100):
@@ -34,8 +35,42 @@ def ocr_image(filepath, threshold=100):
     return txt
 
 
+def txt_calculation(txt):
+    # engでやる限り全角文字は考えなくて良い？？
+    # 空白削除
+    txt = txt.replace(' ', '')
+    # 0変換
+    txt = re.sub('O|o', '0', txt)
+    # ()変換
+    txt = re.sub(r'\[|\{|「', '(', txt)
+    txt = re.sub(r'\]|\}|」', ')', txt)
+    # ×変換
+    txt_for_print = re.sub('X|x', '×', txt)
+    txt_for_calc = re.sub('X|x', '*', txt)
+
+    if re.search(r'[a-zA-Z]+', txt_for_calc):
+        return txt_for_print, 'has alphabet character and cannot be interpreted as equation'
+
+    try:
+        ans = eval(txt_for_calc)
+    except Exception as e:
+        return txt_for_print, 'cannot be interpreted as equation because of ' + str(e)
+    if ans == None:
+        return txt_for_print, 'cannot be calculated'
+
+    return txt_for_print, ans
+
+
 '''
 ----------以下テスト用----------
+'''
+
+# test_txt = '13x(2+8」 -1 oX2'
+test_txt = '(3x[2+8]-1oX2'
+# test_txt = "(print('aaa'))"
+# test_txt = "exit()"
+print(txt_calculation(test_txt))
+
 '''
 # OCRが使用可能かをチェック
 tools = pyocr.get_available_tools()
@@ -90,3 +125,4 @@ for w in res:
 res_im.show()
 txt = ''.join(txt_lis)
 print(txt)
+'''
