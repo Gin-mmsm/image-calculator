@@ -18,14 +18,12 @@ flask_app
 │ │ ├ index.css
 │ │ └ index.js
 │ ├ templates　--- テンプレート
-│ │ ├ layout.html
-│ │ └ index.html
+│ │ └ layout.html
 │ ├ __init__.py
 │ ├ views.py
 │ └ calculator.py --- 機械学習用
 ├ assets --- 画像ファイル、随時追加
 │ └ sample.png
-├ package.json --- react設定ファイル
 ├ Procfile --- Heroku
 ├ README.md
 ├ run.py --- アプリ実行用スクリプト（アプリの入り口）
