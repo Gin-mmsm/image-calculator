@@ -26,11 +26,16 @@ def upload_file():
         # モデルを使って判定する
         txt = ocr_image(filepath=filepath)
         txt_for_print, ans = txt_calculation(txt=txt)
+        calc_error = is_num(txt_for_print)
 
-        return render_template('layout.html', filepath=filepath, txt=txt_for_print, ans=ans)
+        return render_template('layout.html', filepath=filepath, txt=txt_for_print, ans=ans, calc_error=calc_error)
 
 
 @app.errorhandler(werkzeug.exceptions.RequestEntityTooLarge)
 def handle_over_max_file_size(error):
     print('werkzeug.exceptions.RequestEntityTooLarge')
     return 'result: file size is overed.'
+
+
+def is_num(string):
+    return string.replace('.', '').isnumeric()
