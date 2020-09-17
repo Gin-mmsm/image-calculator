@@ -63,14 +63,14 @@ def txt_calculation(txt):
     txt_for_calc = re.sub('[Xx]', '*', txt)
 
     if re.search(r'[a-zA-Z]+', txt_for_calc):
-        return txt_for_print, 'has alphabet character and cannot be interpreted as equation'
+        return txt_for_print, ' has alphabet character and cannot be interpreted as equation'
 
     try:
         ans = eval(txt_for_calc)
     except Exception as e:
-        return txt_for_print, 'cannot be interpreted as equation because of ' + str(e)
+        return txt_for_print, ' cannot be interpreted as equation because of ' + str(e)
     if ans is None:
-        return txt_for_print, 'cannot be calculated'
+        return txt_for_print, ' cannot be calculated'
 
     return txt_for_print, ans
 

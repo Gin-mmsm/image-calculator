@@ -26,7 +26,7 @@ def upload_file():
         # モデルを使って判定する
         txt = ocr_image(filepath=filepath)
         txt_for_print, ans = txt_calculation(txt=txt)
-        calc_error = is_num(txt_for_print)
+        calc_error = not is_num(ans)
 
         return render_template('layout.html', filepath=filepath, txt=txt_for_print, ans=ans, calc_error=calc_error)
 
