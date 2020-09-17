@@ -18,3 +18,7 @@ def upload_file():
         file = request.files['uploadFile']
         if '' == file.filename:
             make_response(jsonify({'result': 'filename must not empty.'}))
+
+        # アプロードされたファイルを保存する
+        filepath = "assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + ".png"
+        file.save(filepath)
