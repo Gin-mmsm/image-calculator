@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw    # 画像処理ライブラリ
+from PIL import Image, ImageDraw, ImageFont    # 画像処理ライブラリ
 import numpy as numpy   # データ分析用ライブラリ
 import pyocr    # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
 import pyocr.builders   # OCR ラッパーライブラリ 対応OCR:Tesseract, Cuneiform
@@ -27,12 +27,23 @@ def ocr_image(filepath, threshold=100):
     mono = gray.point(lambda x: 0 if x < threshold else 255)
 
     # 読み込んだ画像をOCRでテキスト抽出してみる。
-    txt = tool.image_to_string(
+    res = tool.image_to_string(
         mono,
         lang=lang,
-        builder=pyocr.builders.TextBuilder(tesseract_layout=7)
+        builder=pyocr.builders.WordBoxBuilder(tesseract_layout=7)
     )
-    return txt
+
+    res_im = mono.convert('RGB')
+    res_draw = ImageDraw.Draw(res_im)
+    txt_lis = []
+    fnt = ImageFont.truetype(r"../fonts/Apple Symbols.ttf", size=40)
+    for w in res:
+        txt_lis.append(w.content)
+        res_draw.rectangle(
+            (w.position[0], w.position[1]), None, (255, 0, 0), 2)
+        res_draw.text((w.position[0][0], w.position[0][1]-30), font=fnt, text=w.content, fill=(255, 0, 0))
+    txt = ''.join(txt_lis)
+    return txt, res_im
 
 
 def txt_calculation(txt):
@@ -78,14 +89,14 @@ def txt_calculation(txt):
 '''
 ----------以下テスト用----------
 '''
-
+'''
 test_txt = '13x(2+8」\ /-[1 oX2]'
 # test_txt = '(3x[2+8]-1oX2'
 # test_txt = "(print('aaa'))"
 # test_txt = "exit()"
 print(txt_calculation(test_txt))
 
-'''
+
 # OCRが使用可能かをチェック
 tools = pyocr.get_available_tools()
 
@@ -135,6 +146,7 @@ for w in res:
     print(w.position)
     res_draw.rectangle(
         (w.position[0], w.position[1]), None, (255, 0, 0), 2)
+    res_draw.text((w.position[0][0], w.position[0][1]-10), w.content, fill=(255, 0, 0))
 # 標準ビューワーが開きます
 res_im.show()
 txt = ''.join(txt_lis)
