@@ -14,7 +14,7 @@ def upload_file():
     if request.method == 'POST':
         # ファイルが設定されているか
         if 'uploadFile' not in request.files:
-            make_response(jsonify({'result': 'upladFile is required.'}))
+            make_response(jsonify({'result': 'uploadFile is required.'}))
         file = request.files['uploadFile']
         if '' == file.filename:
             make_response(jsonify({'result': 'filename must not empty.'}))
