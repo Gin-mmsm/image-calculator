@@ -21,7 +21,8 @@ flask_app
 │ │ └ layout.html
 │ ├ __init__.py
 │ ├ views.py
-│ └ calculator.py --- 機械学習用
+│ ├ calculator.py --- 機械学習用
+│ └ test.py --- テスト用
 ├ assets --- 画像ファイル、随時追加
 │ └ sample.png
 ├ Procfile --- Heroku
