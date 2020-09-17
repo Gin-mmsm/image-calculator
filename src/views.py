@@ -26,11 +26,13 @@ def upload_file():
         file.save(filepath)
 
         # モデルを使って判定する
-        txt = ocr_image(filepath=filepath)
+        txt, frame_img = ocr_image(filepath=filepath)
+        filepath_frame = "assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + "_frame.png"
+        frame_img.save(filepath_frame)
         txt_for_print, ans = txt_calculation(txt=txt)
         calc_error = not is_num(ans)
 
-        render = render_template('layout.html', filepath=filepath,
+        render = render_template('layout.html', filepath=filepath, filepathframe=filepath_frame,
                                  txt=txt_for_print, ans=ans, calc_error=calc_error,
                                  request=request.method,
                                  )
