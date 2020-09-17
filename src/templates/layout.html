@@ -6,4 +6,11 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='index.css') }}">
     <title>image-calculator</title>
 </head>
+<body>
+    <h1>image calculator!</h1>
+    {% if txt and ans %}
+        <img src="{{ filepath }}" alt="計算式=答え"><br>
+        <p>{{ txt }} = {{ ans }}</p>
+    {% endif %}
+</body>
 </html>
