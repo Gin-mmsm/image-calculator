@@ -8,8 +8,10 @@
 </head>
 <body>
     <h1>image calculator!</h1>
-    {% if txt and ans %}
-        <img src="{{ filepath }}" alt="計算式=答え"><br>
+    <img src="{{ filepath }}" alt="計算式=答え"><br>
+    {% if calc_error %}
+        <p>{{ ans }}</p>
+    {% else %}
         <p>{{ txt }} = {{ ans }}</p>
     {% endif %}
     <form action="/" method="POST" enctype="multipart/form-data">
