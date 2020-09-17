@@ -9,15 +9,17 @@ from src.calculator import ocr_image, txt_calculation
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'GET':
-        return render_template('layout.html')
+        return render_template('layout.html', request=request.method)
 
     if request.method == 'POST':
         # ファイルが設定されているか
         if 'uploadFile' not in request.files:
             make_response(jsonify({'result': 'uploadFile is required.'}))
         file = request.files['uploadFile']
+
+        # ファイルが存在しないとき
         if '' == file.filename:
-            make_response(jsonify({'result': 'filename must not empty.'}))
+            return render_template('layout.html', request=request.method)
 
         # アプロードされたファイルを保存する
         filepath = "assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + ".png"
@@ -28,7 +30,11 @@ def upload_file():
         txt_for_print, ans = txt_calculation(txt=txt)
         calc_error = not is_num(ans)
 
-        return render_template('layout.html', filepath=filepath, txt=txt_for_print, ans=ans, calc_error=calc_error)
+        render = render_template('layout.html', filepath=filepath,
+                                 txt=txt_for_print, ans=ans, calc_error=calc_error,
+                                 request=request.method,
+                                 )
+        return render
 
 
 @app.errorhandler(werkzeug.exceptions.RequestEntityTooLarge)
@@ -38,4 +44,5 @@ def handle_over_max_file_size(error):
 
 
 def is_num(string):
-    return string.replace('.', '').isnumeric()
+    # 整数だった場合
+    return str(string).replace('.', '').isnumeric()

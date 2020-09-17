@@ -10,13 +10,17 @@
     <h1>image calculator!</h1>
 </header>
 <body>
-    <img src="{{ filepath }}" alt="計算式=答え"><br>
-    {% if calc_error %}
-        <p>{{ txt }}{{ ans }}</p>
-    {% elif not txt %}
-        <p>FileNotFoundError!!</p>
-    {% else %}
-        <p>{{ txt }} = {{ ans }}</p>
+    {% if request == 'POST'%}
+        {% if not txt %}
+            <p>FileNotFoundError!!</p>
+        {% else %}
+            <img src="{{ filepath }}" alt="計算式=答え"><br>
+            {% if calc_error %}
+                <p>{{ txt }}{{ ans }}</p>
+            {% else %}
+                <p>{{ txt }} = {{ ans }}</p>
+            {% endif %}
+        {% endif %}
     {% endif %}
     <form action="/" method="POST" enctype="multipart/form-data">
         <p><input type="file" name="uploadFile"/></p>
