@@ -12,7 +12,7 @@
 <body>
     <img src="{{ filepath }}" alt="計算式=答え"><br>
     {% if calc_error %}
-        <p>{{ ans }}</p>
+        <p>{{ txt }}{{ ans }}</p>
     {% elif not txt %}
         <p>FileNotFoundError!!</p>
     {% else %}
