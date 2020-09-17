@@ -28,3 +28,9 @@ def upload_file():
         txt_for_print, ans = txt_calculation(txt=txt)
 
         return render_template('layout.html', filepath=filepath, txt=txt_for_print, ans=ans)
+
+
+@app.errorhandler(werkzeug.exceptions.RequestEntityTooLarge)
+def handle_over_max_file_size(error):
+    print('werkzeug.exceptions.RequestEntityTooLarge')
+    return 'result: file size is overed.'
