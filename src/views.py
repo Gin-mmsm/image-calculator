@@ -22,3 +22,9 @@ def upload_file():
         # アプロードされたファイルを保存する
         filepath = "assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + ".png"
         file.save(filepath)
+
+        # モデルを使って判定する
+        txt = ocr_image(filepath=filepath)
+        txt_for_print, ans = txt_calculation(txt=txt)
+
+        return render_template('layout.html', filepath=filepath, txt=txt_for_print, ans=ans)
