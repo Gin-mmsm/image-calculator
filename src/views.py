@@ -41,3 +41,8 @@ def upload_file():
 def handle_over_max_file_size(error):
     print('werkzeug.exceptions.RequestEntityTooLarge')
     return 'result: file size is overed.'
+
+
+def is_num(string):
+    # 整数だった場合
+    return str(string).replace('.', '').isnumeric()
