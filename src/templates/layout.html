@@ -11,6 +11,8 @@
 </header>
 <body>
     <img src="{{ filepath }}" alt="計算式=答え"><br>
+    <br>
+    <img src="{{ filepathframe }}" alt="読み取り結果"><br>
     {% if calc_error %}
         <p>{{ txt }}{{ ans }}</p>
     {% elif not txt %}
