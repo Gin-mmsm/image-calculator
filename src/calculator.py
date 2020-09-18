@@ -41,7 +41,7 @@ def ocr_image(filepath, threshold=100):
         txt_lis.append(w.content)
         res_draw.rectangle(
             (w.position[0], w.position[1]), None, (255, 0, 0), 2)
-        res_draw.text((w.position[0][0], w.position[0][1]-30), font=fnt, text=w.content, fill=(255, 0, 0))
+        res_draw.text((w.position[0][0]+5, w.position[0][1]+5), font=fnt, text=w.content, fill=(255, 0, 0))
     txt = ''.join(txt_lis)
     return txt, res_im
 
