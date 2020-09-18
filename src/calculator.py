@@ -16,9 +16,9 @@ def ocr_image(filepath, threshold=100):
 
     # OCR対応言語を表示
     langs = tool.get_available_languages()
-    # print("Available languages: %s" % ", ".join(langs))
+    print("Available languages: %s" % ", ".join(langs))
     lang = 'eng'
-    # print("Will use lang '%s'" % lang)
+    print("Will use lang '%s'" % lang)
 
     # 画像の前処理
     # とりあえず2値化
