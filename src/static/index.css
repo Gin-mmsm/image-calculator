@@ -1,0 +1,56 @@
+h1 {
+    padding: 0.5em 1em;/*文字の上下 左右の余白*/
+    color: #494949;/*文字色*/
+    background: #f4f4f4;/*背景色*/
+    border-left: solid 5px #7db4e6;/*左線*/
+    border-bottom: solid 3px #d7d7d7;/*下線*/
+}
+
+#images {
+    text-align: center;
+}
+
+.image {
+    width: 80%;
+    height: auto;
+}
+
+.error-box {
+    padding: 0.5em 1em;
+    margin: 20em 0;
+    color: #ffffff;
+    background: #ff7968;
+    border-left: solid 10px #db4025;
+    padding: 8px 19px;
+    margin: 2em 0;
+}
+.error-box p {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.ans-box {
+    padding: 0.8em 1.6em;
+    margin: 2em 0;
+    border: double 5px #4ec4d3;
+}
+.ans-box p {
+    font-size: large;
+    margin: 0;
+    padding: 0;
+}
+
+#sbmt-btn {
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 25px;
+    border: none;
+    text-decoration: none;
+    color: #FFF;
+    background-image: linear-gradient(45deg, #6795fd 0%, #67ceff 100%);
+    transition: .4s;
+}
+#sbmt-btn:hover {
+    background-image: linear-gradient(45deg, #5785ed 0%, #57beef 100%);
+  }
