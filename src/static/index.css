@@ -37,6 +37,7 @@ h1 {
 }
 .ans-box p {
     font-size: large;
+    text-align: center;
     margin: 0;
     padding: 0;
 }
