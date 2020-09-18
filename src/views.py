@@ -22,13 +22,13 @@ def upload_file():
             return render_template('layout.html', request=request.method)
 
         # アプロードされたファイルを保存する
-        filepath = "assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + ".png"
-        file.save(filepath)
+        filepath = "static/assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + ".png"
+        file.save("src/" + filepath)
 
         # モデルを使って判定する
-        txt, frame_img = ocr_image(filepath=filepath)
-        filepath_frame = "assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + "_frame.png"
-        frame_img.save(filepath_frame)
+        txt, frame_img = ocr_image(filepath="src/" + filepath)
+        filepath_frame = "static/assets/" + datetime.now().strftime("%Y%m%d%H%M%S") + "_frame.png"
+        frame_img.save("src/" + filepath_frame)
         txt_for_print, ans = txt_calculation(txt=txt)
         calc_error = not is_num(ans)
 
