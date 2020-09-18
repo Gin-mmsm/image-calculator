@@ -36,7 +36,7 @@ def ocr_image(filepath, threshold=100):
     res_im = mono.convert('RGB')
     res_draw = ImageDraw.Draw(res_im)
     txt_lis = []
-    fnt = ImageFont.truetype(r"../fonts/Apple Symbols.ttf", size=40)
+    fnt = ImageFont.truetype(r"fonts/Apple Symbols.ttf", size=40)
     for w in res:
         txt_lis.append(w.content)
         res_draw.rectangle(
