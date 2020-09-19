@@ -86,4 +86,3 @@ def txt_calculation(txt):
         return txt_for_print, ' cannot be calculated'
 
     return txt_for_print, ans
-    
